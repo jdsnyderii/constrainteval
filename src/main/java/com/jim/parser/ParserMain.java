@@ -40,6 +40,14 @@ public class ParserMain {
   /**
    * Parse using the Antlr {@link CommonTokenStream} over the given {@link TokenSource} and add an
    * optional {@link DegreePlanListener}
+   * <p>
+   *
+   * It is also possible to add functionality like:
+   * <p/>
+   * <code>
+   * ParseTree tree = parser.parse();
+   * tree.accept(new DegreePlanBaseVisitor<Void>());
+   * </code>
    */
   public void parse() {
     TokenStream s = new CommonTokenStream(source);
@@ -47,6 +55,6 @@ public class ParserMain {
     if (listener != null) {
       parser.addParseListener(listener);
     }
-    parser.parse();
+
   }
 }
