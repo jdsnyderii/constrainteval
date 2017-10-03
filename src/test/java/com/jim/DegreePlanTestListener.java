@@ -10,7 +10,7 @@ public class DegreePlanTestListener implements DegreePlanListener {
 
   @Override
   public void enterParse(DegreePlanParser.ParseContext ctx) {
-    logIndentedMessage("Starting DegreePlan", ctx);
+    logIndentedMessage("Starting Parse", ctx);
   }
 
   @Override
@@ -73,12 +73,12 @@ public class DegreePlanTestListener implements DegreePlanListener {
 
   @Override
   public void enterOr_req(DegreePlanParser.Or_reqContext ctx) {
-    System.out.println("enter Or Boolean Requirement");
+    logIndentedMessage("enter Or Boolean Requirement", ctx);
   }
 
   @Override
   public void exitOr_req(DegreePlanParser.Or_reqContext ctx) {
-    System.out.println("exit Or Boolean Requirement");
+    logIndentedMessage("exit Or Boolean Requirement",ctx);
   }
 
   @Override
@@ -101,7 +101,7 @@ public class DegreePlanTestListener implements DegreePlanListener {
   }
 
   private void logIndentedMessage(String message, ParserRuleContext ctx) {
-    int indent = (ctx.children != null) ? ctx.children.size() * 2 : 0;
+    int indent = (ctx.depth() -1) * 2;
     if (indent > 0) {
       String format = "%" + indent + "s";
       System.out.printf(format, " ");
