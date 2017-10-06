@@ -1,0 +1,11 @@
+{
+  "courseCatalog": {
+    "name" : "mine",
+    "year": 2017
+  },
+  "degreePlan": {
+    "numberOfUnits" : 100.5,
+    "name1": "asd",
+    "name" : "asd"
+  }
+}
