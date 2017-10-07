@@ -1,4 +1,4 @@
-package com.jim.parser;
+package org.jim.parser;
 
 import org.antlr.v4.runtime.ListTokenSource;
 import org.antlr.v4.runtime.Token;

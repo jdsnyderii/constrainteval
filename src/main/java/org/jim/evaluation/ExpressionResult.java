@@ -1,4 +1,4 @@
-package com.jim.evaluation;
+package org.jim.evaluation;
 
 public class ExpressionResult {
 

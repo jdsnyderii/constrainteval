@@ -1,7 +1,7 @@
 grammar DegreePlan;
 
 @header {
-package com.jim.antlr4.parser;
+package org.jim.antlr4.parser;
 }
 
 @members {

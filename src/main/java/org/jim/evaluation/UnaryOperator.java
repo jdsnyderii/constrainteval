@@ -1,11 +1,8 @@
-package com.jim.evaluation;
+package org.jim.evaluation;
 
 public abstract class UnaryOperator implements Operator {
 
   private String opName = "unary nop";
-
-  public UnaryOperator() {
-  }
 
   @Override
   public void setOpName(String opName) {

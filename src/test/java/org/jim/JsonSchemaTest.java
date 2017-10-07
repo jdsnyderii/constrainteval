@@ -1,4 +1,4 @@
-package com.jim;
+package org.jim;
 
 import org.junit.Test;
 

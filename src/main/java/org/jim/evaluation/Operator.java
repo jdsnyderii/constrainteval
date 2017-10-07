@@ -1,4 +1,4 @@
-package com.jim.evaluation;
+package org.jim.evaluation;
 
 public interface Operator {
   void setOpName(String opName);

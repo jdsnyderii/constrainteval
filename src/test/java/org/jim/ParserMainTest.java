@@ -1,7 +1,7 @@
-package com.jim;
+package org.jim;
 
 import com.jim.antlr4.parser.DegreePlanParser;
-import com.jim.parser.ParserMain;
+import org.jim.parser.ParserMain;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenFactory;
 import org.junit.Test;

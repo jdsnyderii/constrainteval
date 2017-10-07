@@ -1,4 +1,4 @@
-package com.jim;
+package org.jim;
 
 import com.jim.antlr4.parser.DegreePlanListener;
 import com.jim.antlr4.parser.DegreePlanParser;

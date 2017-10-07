@@ -1,8 +1,8 @@
-package com.jim;
+package org.jim;
 
-import com.jim.evaluation.Expression;
-import com.jim.evaluation.ExpressionType;
-import com.jim.evaluation.RequirementSatisfyingOperator;
+import org.jim.evaluation.Expression;
+import org.jim.evaluation.ExpressionType;
+import org.jim.evaluation.RequirementSatisfyingOperator;
 
 public class Main {
 
