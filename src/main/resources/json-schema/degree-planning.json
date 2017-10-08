@@ -2,22 +2,6 @@
   "$schema": "http://json-schema.org/draft-06/schema#",
   "id": "http://jim.org/degree-planning/degree-planning.json#",
   "definitions": {
-    "vertexProps": {
-      "type": "object",
-      "properties": {
-        "vertexId": {
-          "type": "string",
-          "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}"
-        },
-        "vertexType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "vertexId",
-        "vertexType"
-      ]
-    },
     "degreePlan": {
       "type": "object",
       "properties": {
@@ -28,7 +12,7 @@
           "type": "number"
         },
         "$vertexProps": {
-          "$ref": "#/definitions/vertexProps"
+          "$ref": "file:src/main/resources/json-schema/vertex-properties.json#/definitions/vertexProperties"
         }
       },
       "required": [
