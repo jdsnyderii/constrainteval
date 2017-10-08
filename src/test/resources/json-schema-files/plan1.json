@@ -1,10 +1,10 @@
 {
   "degreePlan": {
-    "$vertexProps" : {
-      "vertexId" : "57a63ee6-3340-4fc3-a1e7-d4fd6fea2876",
-      "vertexType": "degreePlan"
+    "$vertexProperties": {
+      "$vertexId": "57a63ee6-3340-4fc3-a1e7-d4fd6fea2876",
+      "$vertexType": "degreePlan"
     },
-    "name1": "jim",
+    "name": "jim",
     "numberOfUnits": 100.1
   }
 }

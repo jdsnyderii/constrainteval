@@ -1,30 +1,105 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "id": "http://jim.org/degree-planning/degree-planning.json#",
+  "$id": "http://jim.org/degree-planning.json#",
+  "title": "root schema",
   "definitions": {
-    "degreePlan": {
+    "vertexProperties": {
+      "title": "Required Vertex Properties",
+      "$id": "vertexProperties",
       "type": "object",
       "properties": {
-        "name1": {
+        "$vertexProperties": {
+          "properties": {
+            "$vertexId": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$"
+            },
+            "$vertexType": {
+              "type": "string",
+              "enum": [
+                "course",
+                "degreePlan",
+                "courseCatalog"
+              ]
+            }
+          },
+          "required": [
+            "$vertexId",
+            "$vertexType"
+          ]
+        }
+      }, "required": ["$vertexProperties"]
+    },
+    "degreePlan": {
+      "title": "A degree Plan",
+      "$id": "degreePlan",
+      "type": "object",
+      "properties": {
+        "name": {
           "type": "string"
         },
         "numberOfUnits": {
           "type": "number"
-        },
-        "$vertexProps": {
-          "$ref": "file:src/main/resources/json-schema/vertex-properties.json#/definitions/vertexProperties"
         }
       },
       "required": [
-        "$vertexProps"
+        "name",
+        "numberOfUnits"
+      ]
+    },
+    "courseCatalog": {
+      "title": "A course catalog",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "year"
       ]
     }
   },
   "type": "object",
-  "properties": {
-    "degreePlan": {
-      "$ref": "#/definitions/degreePlan"
+  "oneOf": [
+    {
+      "properties": {
+        "degreePlan": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/degreePlan"
+            },
+            {
+              "$ref": "#/definitions/vertexProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "degreePlan"
+      ]
+    },
+    {
+      "properties": {
+        "courseCatalog": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/courseCatalog"
+            },
+            {
+              "$ref": "#/definitions/vertexProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "courseCatalog"
+      ]
     }
-  }
+  ]
 }
 
