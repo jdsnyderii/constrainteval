@@ -12,18 +12,25 @@ public class JsonSchemaTest {
 
   @Test
   public void testSchema() throws Exception {
+    
+    InputStream inputStream = getResourceAsStream("json-schema/degree-planning.json");
 
+    JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
     SchemaLoader schemaLoader = SchemaLoader.builder()
-        .schemaJson(jsonSchema)
+        .schemaJson(rawSchema)
         .resolutionScope("http://jim.org/") // setting the default resolution scope
         .build();
     
-    InputStream inputStream = getResourceAsStream("json-schema/degree-planning.json");
-    JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
-    Schema schema = schemaLoader.load(rawSchema);
+    Schema schema = schemaLoader.load().build();
 
     JSONObject plan = new JSONObject(new JSONTokener(getResourceAsStream("json-schema-files/plan1.json")));
-    schema.validate(plan); // throws a ValidationException if this object is invalid
+    
+    try {
+      schema.validate(plan);
+    } catch (ValidationException e) {
+      System.out.println(e.getMessage());
+      e.getCausingExceptions().stream().map(ValidationException::getMessage).forEach(System.out::println);
+    }
 
   }
 
