@@ -1,35 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "id": "http://jim.com/degree-plan.json",
+  "id": "http://jim.org/degree-planning/degree-plan.json#",
   "definitions": {
-    "courseCatalogType": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "year": {
-          "type": "integer"
-        }
-      }
-    },
     "degreePlanType": {
       "type": "object",
       "properties": {
-        "name1": { "type" : "string" },
-        "numberOfUnits" : { "type" : "number"}
+        "name1": {
+          "type": "string"
+        },
+        "numberOfUnits": {
+          "type": "number"
+        }
       }
-    },
-    "degreePlanTypeNames" : {
-      "propertyNames" : { "enum" : ["name1", "numberOfUnits"]}
-    }
-  },
-  "properties": {
-    "courseCatalog": {
-      "$ref": "#/definitions/courseCatalogType"
-    },
-    "degreePlan": {
-      "$ref": "#/definitions/degreePlanType"
     }
   }
 }

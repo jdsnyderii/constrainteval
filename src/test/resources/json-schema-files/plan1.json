@@ -1,11 +1,10 @@
 {
-  "courseCatalog": {
-    "name" : "mine",
-    "year": 2017
-  },
   "degreePlan": {
-    "numberOfUnits" : 100.5,
-    "name1": "asd",
-    "name" : "asd"
+    "$vertexProps" : {
+      "vertexId" : "57a63ee6-3340-4fc3-a1e7-d4fd6fea2876",
+      "vertexType": "degreePlan"
+    },
+    "name1": "jim",
+    "numberOfUnits": 100.1
   }
 }
