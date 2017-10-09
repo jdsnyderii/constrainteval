@@ -9,41 +9,61 @@ import org.json.JSONTokener;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JsonSchemaTest {
 
+  private static Iterable<String> data() {
+    return Arrays.asList("json-schema-files/catalog1.json", "json-schema-files/plan1.json");
+  }
+
+  private List<String> failedFiles = new ArrayList<>();
+  private static final String schemaName = "json-schema/degree-planning.json";
+
   @Test
-  public void testSchema() throws Exception {
+  public void testFiles() throws Exception {
+    Schema schema = buildSchema(schemaName);
+    data().forEach(f -> testFile(f, schema));
+    if (failedFiles.size() > 0) {
+      TestCase.fail("Some files failed to validate");
+    }
+  }
 
-    InputStream inputStream = getResourceAsStream("json-schema/degree-planning.json");
-
+  private Schema buildSchema(String name) throws Exception {
+    InputStream inputStream = getResourceAsStream(name);
     JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
     SchemaLoader schemaLoader = SchemaLoader.builder()
         .schemaJson(rawSchema)
         .build();
 
-    Schema schema = schemaLoader.load().build();
+    return schemaLoader.load().build();
+  }
 
-    JSONObject plan = new JSONObject(new JSONTokener(getResourceAsStream("json-schema-files/plan1.json")));
+  private void testFile(String fileName, Schema schema) {
+    try (InputStream inputStream = getResourceAsStream(fileName)) {
 
-    try {
-      schema.validate(plan);
-    } catch (ValidationException e) {
-      logValidationException(e);
-      TestCase.fail(e.getMessage());
+      JSONObject vertex = new JSONObject(new JSONTokener(inputStream));
+      try {
+        schema.validate(vertex);
+      } catch (ValidationException e) {
+        logValidationException(fileName, e);
+        failedFiles.add(fileName);
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
-
   }
 
-  private void logValidationCausingExceptions(List<ValidationException> exceptions) {
-    exceptions.forEach(this::logValidationException);
+  private void logValidationCausingExceptions(String fileName, List<ValidationException> exceptions) {
+    exceptions.forEach(v -> logValidationException(fileName, v));
   }
 
-  private void logValidationException(ValidationException e) {
-    System.out.println(e.getMessage());
+  private void logValidationException(String fileName, ValidationException e) {
+    System.out.println(String.format("Error in file '%s' : '%s'", fileName, e.getMessage()));
     if (e.getCausingExceptions().size() > 0) {
-      logValidationCausingExceptions(e.getCausingExceptions());
+      logValidationCausingExceptions(fileName, e.getCausingExceptions());
     }
   }
 

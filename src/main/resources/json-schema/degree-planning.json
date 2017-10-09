@@ -28,39 +28,56 @@
             "$vertexType"
           ]
         }
-      }, "required": ["$vertexProperties"]
+      },
+      "required": [
+        "$vertexProperties"
+      ]
     },
     "degreePlan": {
       "title": "A degree Plan",
       "$id": "degreePlan",
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
+      "allOf": [
+        {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "numberOfUnits": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "name",
+            "numberOfUnits"
+          ]
         },
-        "numberOfUnits": {
-          "type": "number"
+        {
+          "$ref": "#/definitions/vertexProperties"
         }
-      },
-      "required": [
-        "name",
-        "numberOfUnits"
       ]
     },
     "courseCatalog": {
       "title": "A course catalog",
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
+      "allOf": [
+        {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "name",
+            "year"
+          ]
         },
-        "year": {
-          "type": "number"
+        {
+          "$ref": "#/definitions/vertexProperties"
         }
-      },
-      "required": [
-        "name",
-        "year"
       ]
     }
   },
@@ -69,14 +86,7 @@
     {
       "properties": {
         "degreePlan": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/degreePlan"
-            },
-            {
-              "$ref": "#/definitions/vertexProperties"
-            }
-          ]
+          "$ref": "#/definitions/degreePlan"
         }
       },
       "required": [
@@ -86,14 +96,7 @@
     {
       "properties": {
         "courseCatalog": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/courseCatalog"
-            },
-            {
-              "$ref": "#/definitions/vertexProperties"
-            }
-          ]
+          "$ref": "#/definitions/courseCatalog"
         }
       },
       "required": [
@@ -102,4 +105,6 @@
     }
   ]
 }
+
+
 
